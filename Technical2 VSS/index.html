@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A personal portfolio showcasing projects, skills, and contact information.">
+	<title>My Portfolio</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--ink: #202b3c;
+			--muted: #657286;
+			--blue: #0d6efd;
+			--pale-blue: #eaf3ff;
+			--surface: #fff;
+			--page: #f5f7fb;
+		}
+
+		* { box-sizing: border-box; }
+
+		html { scroll-behavior: smooth; }
+
+		body {
+			margin: 0;
+			background: var(--page);
+			color: var(--ink);
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+		}
+
+		a { color: inherit; }
+
+		.container {
+			width: min(1100px, calc(100% - 40px));
+			margin: 0 auto;
+		}
+
+		.topbar {
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			background: #1f1f1f;
+			color: #fff;
+			padding: 17px 0;
+		}
+
+		.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+		.logo { color: #fff; font-size: 22px; font-weight: 700; text-decoration: none; }
+		.menu { display: flex; flex-wrap: wrap; gap: 22px; }
+		.menu a { color: #e8e8e8; font-size: 14px; text-decoration: none; }
+		.menu a:hover, .menu a:focus-visible { color: #8dbbff; }
+
+		.hero { padding: 88px 0; background: linear-gradient(125deg, #eaf3ff, #dfefff); }
+		.hero-inner { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+		.hero-left { flex: 1 1 60%; }
+		.hero-right { flex: 0 1 35%; display: flex; justify-content: center; }
+		.hello { color: var(--muted); font-size: 20px; margin: 0; }
+		h1 { margin: 8px 0; font-size: clamp(40px, 7vw, 60px); line-height: 1.12; letter-spacing: -2px; }
+		.job { color: var(--blue); font-size: 24px; font-weight: 600; margin: 0 0 16px; }
+		.intro { max-width: 580px; color: #536176; margin: 0 0 26px; }
+		.button, .button2 {
+			display: inline-block;
+			padding: 11px 22px;
+			border: 1px solid transparent;
+			border-radius: 6px;
+			font-weight: 600;
+			text-decoration: none;
+			transition: transform .15s ease, background-color .15s ease;
+		}
+		.button { margin-right: 8px; background: var(--blue); color: #fff; }
+		.button2 { background: #fff; border-color: #cbd4e0; color: var(--ink); }
+		.button:hover, .button2:hover { transform: translateY(-2px); }
+		.picture-box {
+			display: grid;
+			width: min(300px, 70vw);
+			aspect-ratio: 1;
+			place-items: center;
+			border: 10px solid rgba(255,255,255,.7);
+			border-radius: 50%;
+			background: linear-gradient(145deg, #c8d9ff, #94b8ff);
+			box-shadow: 0 20px 55px rgba(40, 82, 150, .17);
+			color: #fff;
+			font-size: 86px;
+			font-weight: 700;
+			letter-spacing: -8px;
+		}
+
+		section { padding: 74px 0; scroll-margin-top: 70px; }
+		.section-heading { margin: 0 0 10px; font-size: 34px; letter-spacing: -1px; }
+		.section-lead { max-width: 650px; margin: 0 0 32px; color: var(--muted); }
+		.about-copy { max-width: 800px; color: #536176; }
+		.skills { background: var(--surface); }
+		.skill-list { display: flex; flex-wrap: wrap; gap: 12px; padding: 0; margin: 0; list-style: none; }
+		.skill-list li { padding: 9px 15px; border: 1px solid #dce5f0; border-radius: 999px; background: #f8faff; color: #354258; font-weight: 600; }
+		.project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+		.project-card { overflow: hidden; border: 1px solid #e5eaf1; border-radius: 12px; background: #fff; box-shadow: 0 8px 26px rgba(30, 48, 75, .05); }
+		.project-art { display: grid; min-height: 150px; place-items: center; background: var(--pale-blue); color: var(--blue); font-size: 42px; font-weight: 700; }
+		.project-card:nth-child(2) .project-art { background: #e9f7f1; color: #25865e; }
+		.project-card:nth-child(3) .project-art { background: #fff2e5; color: #c86d25; }
+		.project-body { padding: 20px; }
+		.project-body h3 { margin: 0 0 8px; font-size: 20px; }
+		.project-body p { margin: 0; color: var(--muted); }
+		.contact { background: var(--surface); }
+		.contact-card { padding: 30px; border-radius: 12px; background: var(--pale-blue); }
+		.contact-card p { margin: 0 0 18px; color: #536176; }
+		.contact-link { color: #0758c8; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+		footer { padding: 22px 0; background: #1f1f1f; color: #d4d4d4; text-align: center; font-size: 14px; }
+		footer p { margin: 0; }
+
+		@media (max-width: 760px) {
+			.topbar-inner { align-items: flex-start; flex-direction: column; gap: 10px; }
+			.menu { gap: 16px; }
+			.hero { padding: 60px 0; }
+			.hero-inner { flex-direction: column-reverse; align-items: flex-start; gap: 30px; }
+			.hero-right { align-self: center; }
+			.picture-box { width: 210px; font-size: 64px; }
+			.project-grid { grid-template-columns: 1fr; }
+			section { padding: 56px 0; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			html { scroll-behavior: auto; }
+			*, *::before, *::after { transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="container topbar-inner">
+			<a class="logo" href="#home">My Portfolio</a>
+			<nav class="menu" aria-label="Main navigation">
+				<a href="#about">About</a>
+				<a href="#skills">Skills</a>
+				<a href="#projects">Projects</a>
+				<a href="#contact">Contact</a>
+			</nav>
+		</div>
+	</header>
+
+	<main>
+		<section class="hero" id="home">
+			<div class="container hero-inner">
+				<div class="hero-left">
+					<p class="hello">Hello, I'm</p>
+					<h1>Your Name</h1>
+					<p class="job">Web Developer</p>
+					<p class="intro">I create thoughtful, accessible, and responsive digital experiences. Explore my work and get in touch to discuss your next project.</p>
+					<a class="button" href="#projects">View My Work</a>
+					<a class="button2" href="#contact">Contact Me</a>
+				</div>
+				<div class="hero-right">
+					<div class="picture-box" role="img" aria-label="Placeholder portrait with the initials YN">YN</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="about">
+			<div class="container">
+				<h2 class="section-heading">About Me</h2>
+				<p class="about-copy">I’m a web developer who enjoys turning ideas into clear, useful online experiences. I focus on clean code, responsive layouts, and making websites easy for everyone to use. This portfolio is a place to share what I’m learning and building.</p>
+			</div>
+		</section>
+
+		<section class="skills" id="skills">
+			<div class="container">
+				<h2 class="section-heading">Skills</h2>
+				<p class="section-lead">Tools and technologies I use to bring web projects to life.</p>
+				<ul class="skill-list">
+					<li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive Design</li><li>Accessibility</li><li>Git</li>
+				</ul>
+			</div>
+		</section>
+
+		<section id="projects">
+			<div class="container">
+				<h2 class="section-heading">Featured Projects</h2>
+				<p class="section-lead">A few example projects. Replace these cards with links and details about your own work.</p>
+				<div class="project-grid">
+					<article class="project-card">
+						<div class="project-art" aria-hidden="true">01</div>
+						<div class="project-body"><h3>Portfolio Website</h3><p>A responsive personal website to introduce a creator and showcase their work.</p></div>
+					</article>
+					<article class="project-card">
+						<div class="project-art" aria-hidden="true">02</div>
+						<div class="project-body"><h3>Task Planner</h3><p>A simple interface concept for organizing everyday tasks and priorities.</p></div>
+					</article>
+					<article class="project-card">
+						<div class="project-art" aria-hidden="true">03</div>
+						<div class="project-body"><h3>Local Café</h3><p>A welcoming landing page concept with useful information for visitors.</p></div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="contact" id="contact">
+			<div class="container">
+				<h2 class="section-heading">Let's Connect</h2>
+				<div class="contact-card">
+					<p>Have a question or want to work together? Send me an email and I’ll be happy to hear from you.</p>
+					<a class="contact-link" href="mailto:hello@example.com">hello@example.com</a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<div class="container"><p>&copy; 2025 Your Name. All rights reserved.</p></div>
+	</footer>
+</body>
+</html>
